@@ -1,0 +1,320 @@
+/* ════════════════════════════════════════
+   Leaderboard Page
+════════════════════════════════════════ */
+.lb-page {
+    display: flex;
+    flex-direction: column;
+    background: transparent;
+    min-height: 100vh;
+}
+
+/* ── Header ── */
+.lb-page-header {
+    padding: 80px 24px 16px;
+    max-width: 1100px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.lb-page-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    color: var(--text);
+    line-height: 1;
+}
+
+.lb-cursor {
+    animation: cursorBlink 0.8s step-end infinite;
+    font-weight: 300;
+}
+
+.lb-page-sub {
+    font-size: 0.78rem;
+    color: var(--text-3);
+    margin-top: 8px;
+    letter-spacing: 0.03em;
+}
+
+.lb-brand {
+    color: var(--green);
+    font-weight: 700;
+}
+
+/* ── Section ── */
+.lb-section {
+    padding: 6px 24px;
+    max-width: 1100px;
+    margin: 0 auto;
+    width: 100%;
+    margin-bottom: 8px;
+}
+
+.lb-section-label {
+    font-family: var(--font-display);
+    font-size: 0.58rem;
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    color: var(--green);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    opacity: 0.65;
+}
+
+/* ── Your Rank Card ── */
+.lb-you-card {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0;
+    background: rgba(0, 255, 135, 0.04);
+    border: 1px solid rgba(0, 255, 135, 0.18);
+    border-radius: var(--r-md);
+    padding: 20px 24px;
+    overflow: hidden;
+    animation: scaleIn 0.4s var(--ease-spring) both;
+}
+
+.lb-you-glow {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 0% 50%, rgba(0, 255, 135, 0.08) 0%, transparent 60%);
+    pointer-events: none;
+}
+
+.lb-you-rank {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 80px;
+}
+
+.lb-you-rank-num {
+    font-family: var(--font-display);
+    font-size: 2.8rem;
+    font-weight: 900;
+    color: var(--green);
+    line-height: 1;
+    filter: drop-shadow(0 0 12px rgba(0, 255, 135, 0.5));
+}
+
+.lb-you-rank-label {
+    font-size: 0.6rem;
+    font-weight: 700;
+    color: var(--text-3);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 2px;
+}
+
+.lb-you-divider {
+    width: 1px;
+    height: 44px;
+    background: rgba(255, 255, 255, 0.08);
+    margin: 0 24px;
+    flex-shrink: 0;
+}
+
+.lb-you-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+}
+
+.lb-you-stat-val {
+    font-family: var(--font-mono);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--text);
+}
+
+.lb-you-stat-label {
+    font-size: 0.58rem;
+    font-weight: 600;
+    color: var(--text-3);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+/* ── Leaderboard list ── */
+.lb-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.lb-row {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 18px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    overflow: hidden;
+    animation: slideInLeft 0.4s var(--ease-spring) var(--lb-delay, 0s) both;
+    transition: transform 0.22s var(--ease-out), border-color 0.3s;
+}
+
+.lb-row:hover {
+    transform: translateX(5px);
+    border-color: var(--border-2);
+}
+
+.lb-row-you {
+    background: rgba(0, 255, 135, 0.04);
+    border-color: rgba(0, 255, 135, 0.2);
+}
+
+.lb-row-glow-bar {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    opacity: 0.7;
+}
+
+.lb-row-rank {
+    width: 36px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.lb-medal {
+    font-size: 1.4rem;
+}
+
+.lb-rank-num {
+    font-family: var(--font-mono);
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--text-3);
+}
+
+.lb-row-info {
+    flex: 1;
+}
+
+.lb-row-name {
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.lb-you-chip {
+    font-size: 0.5rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    padding: 2px 7px;
+    border-radius: var(--r-full);
+    background: rgba(0, 255, 135, 0.12);
+    border: 1px solid rgba(0, 255, 135, 0.25);
+    color: var(--green);
+}
+
+.lb-row-meta {
+    font-size: 0.62rem;
+    color: var(--text-3);
+    margin-top: 2px;
+    font-family: var(--font-mono);
+}
+
+/* Streak */
+.lb-row-streak {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1px;
+    min-width: 36px;
+}
+
+.lb-streak-num {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #F5A623;
+}
+
+/* Points */
+.lb-row-pts {
+    display: flex;
+    align-items: baseline;
+    gap: 3px;
+    min-width: 60px;
+    justify-content: flex-end;
+}
+
+.lb-pts-num {
+    font-family: var(--font-mono);
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: var(--green);
+}
+
+.lb-pts-unit {
+    font-size: 0.6rem;
+    color: var(--text-3);
+    font-weight: 400;
+}
+
+/* ── Points cards ── */
+.lb-points-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 9px;
+}
+
+@media (min-width: 480px) {
+    .lb-points-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+.lb-point-card {
+    background: rgba(255, 255, 255, 0.025);
+    border: 1px solid var(--border);
+    border-left: 2px solid var(--pc, var(--green));
+    border-radius: var(--r-md);
+    padding: 16px 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    text-align: center;
+    transition: transform 0.22s var(--ease-out);
+}
+
+.lb-point-card:hover {
+    transform: translateY(-3px);
+}
+
+.lb-point-icon {
+    font-size: 1.4rem;
+}
+
+.lb-point-label {
+    font-size: 0.68rem;
+    font-weight: 600;
+    color: var(--text-2);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.lb-point-pts {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 800;
+}
+
+.lb-point-pts-unit {
+    font-size: 0.62rem;
+    font-weight: 400;
+    color: var(--text-3);
+}

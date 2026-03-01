@@ -1,0 +1,301 @@
+/* ════════════════════════════════════════
+   ResultCard — Pure Black GeoSpy Style
+════════════════════════════════════════ */
+.result-card {
+  margin: 20px 0 12px;
+  border-radius: var(--r-xl);
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--border-2);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7);
+  animation: scaleIn 0.45s var(--ease-spring) both;
+  position: relative;
+}
+
+/* Confetti */
+.result-confetti {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  pointer-events: none;
+  z-index: 30;
+}
+
+.confetti-piece {
+  position: absolute;
+  border-radius: 2px;
+  transform-origin: center;
+  animation: confettiBurst var(--dur, 0.9s) var(--ease-out) var(--delay, 0s) both;
+  translate: var(--tx, 0px) 0;
+}
+
+/* Banner */
+.result-banner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 24px 22px;
+  overflow: hidden;
+}
+
+.result-banner-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 15% 50%, rgba(255, 255, 255, 0.06) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.result-banner-icon {
+  font-size: 3rem;
+  animation: breathe 2.5s ease-in-out infinite;
+  filter: drop-shadow(0 0 16px rgba(255, 255, 255, 0.25));
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+}
+
+.result-banner-text {
+  flex: 1;
+  position: relative;
+  z-index: 1;
+}
+
+.result-banner-label {
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+  margin-bottom: 2px;
+}
+
+.result-banner-cat {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.02em;
+}
+
+.result-banner-meta {
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.5);
+  margin-top: 4px;
+  font-family: var(--font-mono);
+}
+
+/* Bin sticker */
+.result-bin-sticker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  border: 1.5px solid;
+  border-radius: 10px;
+  padding: 7px 12px;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
+  transform: rotate(-2deg);
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+}
+
+.result-bin-sticker-label {
+  font-size: 0.48rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  opacity: 0.55;
+  color: inherit;
+}
+
+.result-bin-sticker-value {
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-align: center;
+  line-height: 1.2;
+}
+
+/* Metrics */
+.result-metrics {
+  display: flex;
+  align-items: center;
+  padding: 18px 22px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.result-metric {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.result-metric-divider {
+  width: 1px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.06);
+  flex-shrink: 0;
+}
+
+.rm-icon {
+  font-size: 1.1rem;
+}
+
+.rm-value {
+  font-family: var(--font-mono);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--mc, var(--green));
+  line-height: 1;
+}
+
+.rm-unit {
+  font-size: 0.62rem;
+  font-weight: 400;
+  color: var(--text-2);
+  margin-left: 2px;
+}
+
+.rm-label {
+  font-size: 0.58rem;
+  font-weight: 600;
+  color: var(--text-3);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* ── Per-category Guidance Block ── */
+.guidance-block {
+  margin: 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  background: var(--gb-bg, rgba(60,134,255,0.05));
+  border-left: 3px solid var(--gb-accent, #60a5fa);
+  border-top: 1px solid var(--gb-border, rgba(60,134,255,0.15));
+  border-bottom-color: var(--gb-border, rgba(60,134,255,0.1));
+}
+
+.guidance-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 22px 0;
+}
+
+.guidance-header-icon {
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.guidance-header-label {
+  font-family: var(--font-display);
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gb-accent, #60a5fa);
+}
+
+.guidance-object-chip {
+  margin-left: auto;
+  font-size: 0.52rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: capitalize;
+  padding: 2px 9px;
+  border-radius: var(--r-full);
+  background: rgba(255,255,255,0.06);
+  color: var(--text-2);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.guidance-body-text {
+  font-size: 0.83rem;
+  color: var(--text-2);
+  line-height: 1.68;
+  padding: 8px 22px 12px;
+}
+
+.guidance-tip {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin: 0 22px 14px;
+  padding: 9px 12px;
+  border-radius: var(--r-sm);
+  background: rgba(0,0,0,0.25);
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+.guidance-tip-icon {
+  font-size: 0.85rem;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.guidance-tip-text {
+  font-size: 0.72rem;
+  color: var(--text-3);
+  line-height: 1.55;
+  font-style: italic;
+}
+
+/* Eco reward */
+.eco-reward-banner {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 16px 22px;
+  background: rgba(0, 255, 135, 0.04);
+  border-top: 1px solid rgba(0, 255, 135, 0.1);
+}
+
+.eco-reward-icon-wrap {
+  position: relative;
+  font-size: 1.6rem;
+  flex-shrink: 0;
+  animation: floatY 2.5s ease-in-out infinite;
+}
+
+.eco-reward-glow {
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 255, 135, 0.3) 0%, transparent 70%);
+  animation: breathe 2s ease-in-out infinite;
+}
+
+.eco-reward-info {
+  flex: 1;
+}
+
+.eco-reward-pts {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: var(--green);
+  margin-bottom: 4px;
+}
+
+.eco-bonus-chip {
+  display: inline-block;
+  font-size: 0.6rem;
+  font-weight: 700;
+  background: rgba(0, 255, 135, 0.1);
+  border: 1px solid rgba(0, 255, 135, 0.2);
+  border-radius: var(--r-full);
+  padding: 2px 10px;
+  color: var(--green);
+  margin-bottom: 5px;
+  letter-spacing: 0.05em;
+}
+
+.eco-reward-msg {
+  font-size: 0.76rem;
+  color: var(--text-2);
+  line-height: 1.55;
+}

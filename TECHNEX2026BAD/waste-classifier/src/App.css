@@ -1,0 +1,8 @@
+/* App shell — full width, no constraints */
+.app-shell {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background: transparent;
+  z-index: 1;
+}
