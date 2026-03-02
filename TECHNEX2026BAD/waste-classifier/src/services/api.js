@@ -51,6 +51,9 @@ export async function classifyWaste(imageFile) {
   const response = await fetch(`${API_BASE}/predict`, {
     method: 'POST',
     body: formData,
+    headers: {
+      'bypass-tunnel-reminder': 'true',
+    },
   });
 
   if (!response.ok) {
@@ -182,13 +185,13 @@ export function calcImpact(records) {
  */
 export function calcEcoScore(records) {
   if (!records.length) return 0;
-  const recyclable   = records.filter(r => r.category === 'Recyclable').length;
-  const biodegradable= records.filter(r => r.category === 'Biodegradable').length;
-  const hazardous    = records.filter(r => r.category === 'Hazardous').length;
+  const recyclable = records.filter(r => r.category === 'Recyclable').length;
+  const biodegradable = records.filter(r => r.category === 'Biodegradable').length;
+  const hazardous = records.filter(r => r.category === 'Hazardous').length;
   const total = records.length;
 
-  const recyclingRate    = (recyclable / total) * 40;
-  const disposalRate     = ((recyclable + biodegradable) / total) * 40;
+  const recyclingRate = (recyclable / total) * 40;
+  const disposalRate = ((recyclable + biodegradable) / total) * 40;
   const hazardousCompliance = hazardous === 0 ? 20 : Math.max(0, 20 - (hazardous / total) * 40);
 
   return Math.round(recyclingRate + disposalRate + hazardousCompliance);
@@ -201,9 +204,9 @@ export function generateInsights(records) {
   if (records.length < 3) return ['Scan more items to unlock AI insights.'];
 
   const insights = [];
-  const recyclable   = records.filter(r => r.category === 'Recyclable').length;
-  const biodegradable= records.filter(r => r.category === 'Biodegradable').length;
-  const hazardous    = records.filter(r => r.category === 'Hazardous').length;
+  const recyclable = records.filter(r => r.category === 'Recyclable').length;
+  const biodegradable = records.filter(r => r.category === 'Biodegradable').length;
+  const hazardous = records.filter(r => r.category === 'Hazardous').length;
   const total = records.length;
 
   const recyclingRate = ((recyclable / total) * 100).toFixed(0);
@@ -218,11 +221,11 @@ export function generateInsights(records) {
 
   // Peak time
   const hours = records.map(r => new Date(r.timestamp).getHours());
-  const peakHour = hours.sort((a,b) =>
-    hours.filter(v=>v===b).length - hours.filter(v=>v===a).length
+  const peakHour = hours.sort((a, b) =>
+    hours.filter(v => v === b).length - hours.filter(v => v === a).length
   )[0];
   if (peakHour !== undefined) {
-    insights.push(`🕐  Peak scanning time: ${peakHour}:00 – ${peakHour+1}:00.`);
+    insights.push(`🕐  Peak scanning time: ${peakHour}:00 – ${peakHour + 1}:00.`);
   }
 
   insights.push('🌍  You are contributing to a cleaner, greener city. Keep it up!');
