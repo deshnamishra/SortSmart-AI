@@ -3,6 +3,7 @@ import { classifyWaste, IMPACT, OBJECT_IMPACT } from '../services/api';
 import { addRecord, isDuplicate, claimDailyBonus, ECO_POINTS, calcGreenCredits } from '../services/store';
 import ResultCard from '../components/ResultCard';
 import ImpactPanel from '../components/ImpactPanel';
+import CameraModal from '../components/CameraModal';
 import useScrollReveal from '../hooks/useScrollReveal';
 import './Home.css';
 
@@ -18,6 +19,7 @@ export default function Home() {
   const [toast, setToast] = useState(null);
   const [isDrag, setIsDrag] = useState(false);
   const [ripple, setRipple] = useState(false);
+  const [cameraOpen, setCameraOpen] = useState(false);
   const inputRef = useRef();
 
   /* Typewriter headline */
@@ -93,6 +95,14 @@ export default function Home() {
   function handleReset() {
     setPreview(null); setFile(null); setResult(null); setError('');
     if (inputRef.current) inputRef.current.value = '';
+  }
+
+  function handleCameraCapture(capturedFile, dataURL) {
+    setCameraOpen(false);
+    setFile(capturedFile);
+    setPreview(dataURL);
+    setResult(null);
+    setError('');
   }
 
   const confidence = result?.impact?.confidence ?? null;
@@ -242,11 +252,10 @@ export default function Home() {
           <div className="hero-actions">
             {!preview && !result && (
               <>
-                <label className="btn btn-primary" htmlFor="cam-inp">
+                <button className="btn btn-primary" onClick={() => setCameraOpen(true)}>
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" /><circle cx="12" cy="13" r="4" /></svg>
-                  Camera
-                  <input id="cam-inp" type="file" accept="image/*" capture="environment" hidden onChange={handleFileChange} />
-                </label>
+                  Open Camera
+                </button>
                 <label className="btn btn-ghost" htmlFor="gal-inp">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><rect x="3" y="3" width="18" height="18" rx="2" /><circle cx="8.5" cy="8.5" r="1.5" /><polyline points="21 15 16 10 5 21" /></svg>
                   Upload Photo
@@ -335,6 +344,14 @@ export default function Home() {
       )}
 
       {toast && <div className={`toast ${toast.type}`}>{toast.msg}</div>}
+
+      {/* ── Live Camera Modal ── */}
+      {cameraOpen && (
+        <CameraModal
+          onCapture={handleCameraCapture}
+          onClose={() => setCameraOpen(false)}
+        />
+      )}
     </div>
   );
 }

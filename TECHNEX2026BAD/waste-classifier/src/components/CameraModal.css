@@ -1,0 +1,365 @@
+/* ═══════════════════════════════════════════
+   CameraModal.css  —  Live Camera UI styles
+═══════════════════════════════════════════ */
+
+.cam-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.82);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: camFadeIn 0.2s ease both;
+}
+
+@keyframes camFadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.cam-modal {
+    background: #0d1f35;
+    border: 1px solid rgba(0, 255, 135, 0.18);
+    border-radius: 20px;
+    width: min(96vw, 560px);
+    overflow: hidden;
+    box-shadow: 0 32px 80px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(0, 255, 135, 0.08);
+    display: flex;
+    flex-direction: column;
+    animation: camSlideUp 0.3s cubic-bezier(0.32, 1, 0.46, 1) both;
+}
+
+@keyframes camSlideUp {
+    from {
+        transform: translateY(32px) scale(0.97);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+}
+
+/* ── Header ── */
+.cam-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 18px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.cam-modal-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: #00FF87;
+    text-transform: uppercase;
+}
+
+.cam-modal-title svg {
+    opacity: 0.85;
+}
+
+.cam-close-btn {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.55);
+    border-radius: 8px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    font-size: 0.82rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, color 0.2s;
+}
+
+.cam-close-btn:hover {
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+}
+
+/* ── Viewfinder ── */
+.cam-viewfinder {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4/3;
+    background: #050f1e;
+    overflow: hidden;
+}
+
+.cam-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.cam-video.cam-ready {
+    opacity: 1;
+}
+
+.cam-video.cam-hidden {
+    display: none;
+}
+
+.cam-snapshot {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    animation: camFadeIn 0.25s ease both;
+}
+
+/* Loading state */
+.cam-loading {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    color: rgba(255, 255, 255, 0.45);
+    font-size: 0.82rem;
+    letter-spacing: 0.06em;
+}
+
+.cam-spinner {
+    width: 36px;
+    height: 36px;
+    border: 2px solid rgba(0, 255, 135, 0.15);
+    border-top-color: #00FF87;
+    border-radius: 50%;
+    animation: camSpin 0.8s linear infinite;
+}
+
+@keyframes camSpin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Corner brackets */
+.cam-corners {
+    position: absolute;
+    inset: 20px;
+    pointer-events: none;
+}
+
+.cam-corners::before,
+.cam-corners::after {
+    content: '';
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    border-color: #00FF87;
+    border-style: solid;
+    opacity: 0.7;
+}
+
+.cam-corners::before {
+    top: 0;
+    left: 0;
+    border-width: 2px 0 0 2px;
+    border-radius: 4px 0 0 0;
+}
+
+.cam-corners::after {
+    bottom: 0;
+    right: 0;
+    border-width: 0 2px 2px 0;
+    border-radius: 0 0 4px 0;
+}
+
+/* Extra corners via pseudo on viewfinder */
+.cam-viewfinder::before,
+.cam-viewfinder::after {
+    content: '';
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    border-color: #00FF87;
+    border-style: solid;
+    opacity: 0.7;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.cam-viewfinder::before {
+    top: 20px;
+    right: 20px;
+    border-width: 2px 2px 0 0;
+    border-radius: 0 4px 0 0;
+}
+
+.cam-viewfinder::after {
+    bottom: 20px;
+    left: 20px;
+    border-width: 0 0 2px 2px;
+    border-radius: 0 0 0 4px;
+}
+
+/* Scan line */
+.cam-scan-line {
+    position: absolute;
+    left: 20px;
+    right: 20px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #00FF87, transparent);
+    box-shadow: 0 0 12px #00FF87;
+    animation: camScanMove 2.2s ease-in-out infinite;
+    z-index: 3;
+    pointer-events: none;
+}
+
+@keyframes camScanMove {
+    0% {
+        top: 20px;
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        top: calc(100% - 20px);
+        opacity: 0;
+    }
+}
+
+/* Error */
+.cam-error {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 28px;
+    text-align: center;
+}
+
+.cam-error span {
+    font-size: 2rem;
+}
+
+.cam-error p {
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 0.84rem;
+    line-height: 1.55;
+    max-width: 340px;
+}
+
+/* ── Controls ── */
+.cam-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 18px 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.cam-btn {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    border: none;
+    cursor: pointer;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    border-radius: 10px;
+    padding: 9px 18px;
+    transition: all 0.18s ease;
+}
+
+.cam-btn:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+}
+
+.cam-btn-ghost {
+    background: rgba(255, 255, 255, 0.06);
+    color: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    width: 80px;
+    justify-content: center;
+}
+
+.cam-btn-ghost:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.11);
+    color: #fff;
+}
+
+/* Shutter button */
+.cam-btn-capture {
+    background: #fff;
+    border-radius: 50%;
+    width: 64px;
+    height: 64px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.15), 0 4px 20px rgba(0, 0, 0, 0.4);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.cam-btn-capture:hover:not(:disabled) {
+    transform: scale(1.07);
+    box-shadow: 0 0 0 6px rgba(0, 255, 135, 0.25), 0 4px 24px rgba(0, 0, 0, 0.5);
+}
+
+.cam-btn-capture:active:not(:disabled) {
+    transform: scale(0.94);
+}
+
+.cam-shutter {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.85);
+    border: 2px solid rgba(0, 0, 0, 0.3);
+    transition: background 0.15s;
+}
+
+.cam-btn-capture:hover:not(:disabled) .cam-shutter {
+    background: #0d1f35;
+}
+
+/* Use / scan button */
+.cam-btn-use {
+    background: linear-gradient(135deg, #00FF87, #00c46e);
+    color: #0a1628;
+    font-weight: 700;
+    padding: 11px 24px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 255, 135, 0.3);
+}
+
+.cam-btn-use:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 28px rgba(0, 255, 135, 0.45);
+}

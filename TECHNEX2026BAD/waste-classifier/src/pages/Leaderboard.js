@@ -56,7 +56,7 @@ export default function Leaderboard() {
                         {titleTyped}<span className="lb-cursor">|</span>
                     </h1>
                     <p className="lb-page-sub">
-                        <span className="lb-brand">SortSmart AI</span> · Community Rankings
+                        <span className="lb-brand">Verdant AI</span> · Community Rankings
                     </p>
                 </div>
             </div>

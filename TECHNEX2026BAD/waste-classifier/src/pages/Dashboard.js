@@ -58,7 +58,7 @@ export default function Dashboard() {
             {titleTyped}<span className="dash-cursor">|</span>
           </h1>
           <p className="dash-sub">
-            <span className="dash-sub-brand">SortSmart AI</span> · Sustainability Overview
+            <span className="dash-sub-brand">Verdant AI</span> · Sustainability Overview
           </p>
         </div>
         {total > 0 && (

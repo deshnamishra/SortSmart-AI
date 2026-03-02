@@ -1,8 +1,12 @@
 {
-  "short_name": "SortSmart AI",
-  "name": "SortSmart AI — Waste Intelligence",
+  "short_name": "Verdant AI",
+  "name": "Verdant AI — Waste Intelligence",
   "icons": [
-    { "src": "favicon.ico", "sizes": "64x64 32x32 24x24 16x16", "type": "image/x-icon" }
+    {
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    }
   ],
   "start_url": ".",
   "display": "standalone",

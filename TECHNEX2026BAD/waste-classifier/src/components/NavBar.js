@@ -11,7 +11,7 @@ const Logo = () => (
         <path d="M2 12l10 5 10-5" stroke="#00FF87" strokeWidth="1.5" strokeLinejoin="round" opacity="0.75" />
       </svg>
     </div>
-    <span className="nav-logo-text">SortSmart AI</span>
+    <span className="nav-logo-text">Verdant AI</span>
   </div>
 );
 
